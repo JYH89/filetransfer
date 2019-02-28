@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form action="{{ url_for('upload') }}" method="post" enctype="multipart/form-data">
+ 请选择文件<br>
+    <p><input type="file" name="fname"></p>
+    <p><input type="submit" value="提交"></p>
+</form>
+</body>
+</html>

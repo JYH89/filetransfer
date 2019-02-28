@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+文件解析后如下表：
+<table border="1"  class="uk-table uk-table-hover">
+<thead>
+<tr>
+    <th>发生日期(8)</th>
+    <th>分中心(9)</th>
+    <th>客户名称(60)</th>
+    <th>交易帐号(20)</th>
+    <th>基金帐号(12)</th>
+    <th>基金代码(6)</th>
+    <th>发生额金额(16)</th>
+    <th>发生额标识(2)</th>
+    <th>收款人银行编号(3)</th>
+    <th>收款人帐户名称(100)</th>
+    <th>收款人银行名称(60)</th>
+    <th>收款人银行帐号(28)</th>
+    <th>申请编号(24)</th>
+    <th>币种(3)</th>
+    <th>网点(9)</th>
+    <th>资金方式(2)</th>
+    <th>联行号(12)</th>
+    <th>银行帐户编号(3)</th>
+    <th>机器日期时间(14)</th>
+    <th>客户类别(1)</th>
+    <th>业务辅助代码(2)</th>
+    <th>划款状态(1)</th>
+    <th>对方流水号(24)</th>
+    <th>对方基金代码(6)</th>
+    <th>原申请资金方式(2)</th>
+    <th>原申请编号(24)</th>
+    <th>客户编号(12)</th>
+    <th>原发生额标识(2)</th>
+    <th>银行网络系统日期(8)</th>
+    <th>销售商代码(9)</th>
+    <th>交易来源(12)</th>
+    <th>代扣接口类型(1)</th>
+    <th>省份代码(3)</th>
+    <th>城市代码(4)</th>
+    <th>保留字段(94)</th>
+</tr>
+</thead>
+<tbody>
+{# 使用for循环来遍历list #}
+{% for item in result %}
+	<tr>
+		<td>{{item.vc_occurdate}}</td>
+		<td>{{item.vc_center}}</td>
+		<td>{{item.vc_custname}}</td>
+		<td>{{item.vc_tradeacco}}</td>
+		<td>{{item.vc_fundacco}}</td>
+		<td>{{item.vc_fundcode}}</td>
+		<td>{{item.vc_occurbala}}</td>
+		<td>{{item.vc_occurflag}}</td>
+		<td>{{item.vc_inbankno}}</td>
+		<td>{{item.vc_inacconame}}</td>
+		<td>{{item.vc_inbankname}}</td>
+		<td>{{item.vc_inbankacco}}</td>
+		<td>{{item.vc_requestno}}</td>
+		<td>{{item.vc_moneytype}}</td>
+		<td>{{item.vc_netno}}</td>
+		<td>{{item.vc_capitalmode}}</td>
+		<td>{{item.vc_branchbank}}</td>
+		<td>{{item.vc_bankno}}</td>
+		<td>{{item.vc_machinedate}}</td>
+		<td>{{item.vc_custtype}}</td>
+		<td>{{item.vc_fixbusinflag}}</td>
+		<td>{{item.vc_bankstate}}</td>
+		<td>{{item.vc_targetserial}}</td>
+		<td>{{item.vc_targetfundcode}}</td>
+		<td>{{item.vc_origincapitalmode}}</td>
+		<td>{{item.vc_originserial}}</td>
+		<td>{{item.vc_custno}}</td>
+		<td>{{item.vc_origioccurflag}}</td>
+		<td>{{item.vc_banknetdate}}</td>
+		<td>{{item.vc_saleno}}</td>
+		<td>{{item.vc_tradesource}}</td>
+		<td>{{item.vc_interfacetype}}</td>
+		<td>{{item.vc_provinceno}}</td>
+		<td>{{item.vc_cityno}}</td>
+		<td>{{item.vc_reservefield}}</td>
+	<tr>
+    {# 使用for循环也要用endfor#}
+{% endfor %}
+</tbody>
+</table>
+</body>
+</html>
