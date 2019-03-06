@@ -1,6 +1,18 @@
 #-*-coding:utf-8-*-
 #Author:raychou
 from osfile import db
+
+#保存统一支付模型
+class Bankcode(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    bankengcode=db.Column(db.String(20))
+    banknumcode=db.Column(db.String(20))
+    bankname=db.Column(db.String(30))
+    def __init__(self, bankengcode, banknumcode, bankname):
+        self.bankengcode = bankengcode
+        self.banknumcode = banknumcode
+        self.bankname = bankname
+
 #保存文件信息的模型
 class Osfile(db.Model):
     id = db.Column(db.Integer, primary_key=True)

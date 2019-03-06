@@ -1,12 +1,11 @@
 #-*- coding:utf-8 –*-
 import datetime
 import os
+import re
 
-import chardet
-from flask import Flask, request, jsonify
+from flask import Flask, request
 from flask import render_template
 from flask_sqlalchemy import SQLAlchemy
-from idna import unicode
 from werkzeug.utils import secure_filename
 from model import *
 app = Flask(__name__)
@@ -28,7 +27,14 @@ def upload():
         filename = secure_filename(file.filename)
         # 将文件保存在本地UPLOAD_FOLDER目录下
         file.save(os.path.join(UPLOAD_FOLDER, filename))
-        saveosfile(filename)
+
+        patternos = r"HSMX_YEB_"
+        patterntyzf = r"bank"
+        patterntyzf1 = r"yunbank"
+        if(re.match(patternos,filename)):
+            saveosfile(filename)
+        if(re.match(patterntyzf,filename) or re.match(patterntyzf1,filename)):
+            savetyzffile(filename)
         result = Liqsubject.query.all()
         return render_template('result.html',result=result)
     else:  # 文件不合法
@@ -144,6 +150,20 @@ def saveosfile(filename):
         datanum=datanum-1
     f.close()
     return datanum
+
+#保存文件内容到bankcode表
+def savetyzffile(filename):
+    f =open(os.path.join(UPLOAD_FOLDER, filename)) #  返回一个文件对象  
+    for line in f:
+        line=line.replace('\n','')
+        line=line.replace('("','*')
+        line=line.replace('","', '*')
+        line=line.replace('"),','')
+        strlist=line.split('*')
+        bankcode = Bankcode(bankengcode=strlist[0], banknumcode=strlist[1], bankname=strlist[2])
+        db.session.add(bankcode)
+        db.session.commit()
+    return None
 
 if __name__ == '__main__':
     db.create_all()    # 创建当前应用中声明的所有模型类对应的数据表，db.drop_all()是删除表
